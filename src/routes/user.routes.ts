@@ -6,12 +6,12 @@ export async function userRoutes(fastify: FastifyInstance) {
 
     const userUserCase = new UserUserCase();
 
-    fastify.post<{ Body: UserCreate }>("/", (req, reply) => {
+    fastify.post<{ Body: UserCreate }>("/", async (req, reply) => {
 
         const { name, email } = req.body;
 
         try {
-            const data = userUserCase.create({ name, email });
+            const data = await userUserCase.create({ name, email });
             reply.send(data);
         } catch (error) {
             reply.send(error);

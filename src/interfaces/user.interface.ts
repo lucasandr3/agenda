@@ -1,7 +1,9 @@
 export interface User {
     id: string,
     email: string,
-    name: string
+    name: string,
+    createdAt: Date,
+    updatedAt: Date
 }
 
 export interface UserCreate {
@@ -12,4 +14,5 @@ export interface UserCreate {
 
 export interface UserRepository {
     create(data: UserCreate): Promise<User>;
+    findByEmail(email: string): Promise<User | null>;
 }
